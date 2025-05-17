@@ -50,7 +50,7 @@ class ATrustLogin:
             from selenium.webdriver.chrome.service import Service
             from selenium.webdriver.chrome.options import Options
 
-         # 配置Edge Driver选项
+        # 配置Edge Driver选项
         self.options = Options()
 
         # self.options.add_argument(f'--user-data-dir="{data_dir}"')
@@ -82,6 +82,29 @@ class ATrustLogin:
     # 打开默认的portal地址并等待sangfor_main_auth_container出现
     def open_portal(self):
         self.driver.get(self.portal_address)
+
+        if self.driver.get_cookie("language"):
+            self.driver.delete_cookie("language")
+        if self.driver.get_cookie("lang"):
+            self.driver.delete_cookie("lang")
+
+        self.driver.add_cookie(
+            {
+                "name": "language",
+                "value": "zh-CN",
+                "domain": self.portal_host,
+                "path": "/",
+            }
+        )
+
+        self.driver.add_cookie(
+            {
+                "name": "lang",
+                "value": "zh-cn",
+                "domain": self.portal_host,
+                "path": "/",
+            }
+        )
 
     def wait_login_page(self):
         # 使用显式等待sangfor_main_auth_container元素出现
