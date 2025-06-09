@@ -175,7 +175,7 @@ class ATrustLogin:
             password_input.clear()
             password_input.send_keys(password)
 
-            checkbox = main_auth_div.find_element(By.XPATH, "//input[@type='checkbox']")
+            checkbox = main_auth_div.find_element(By.XPATH, "//*[@id=\"Calc\"]/div[4]/span[1]/div[1]")
             # 检查checkbox是否已经被选中
             if not checkbox.is_selected():
                 self.delay_input()
